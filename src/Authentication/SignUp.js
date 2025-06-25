@@ -6,6 +6,7 @@ import './Signup.css'
 import { CiMail } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa";
 import ima from './Revenue-bro.png'
+import { toast } from 'react-toastify';
 
 import { RiLockPasswordFill } from "react-icons/ri";
 import {useNavigate} from 'react-router-dom'
@@ -23,18 +24,21 @@ const SignUp = () => {
     e.preventDefault();
     if(!username || !email  || !password )
     {
-      alert('Please enter the below all fields');
+      // alert('Please enter the below all fields');
+      toast.warn("Please enter all the fields");
       return;
     }
     
     else{
       try {
-        await axios.post('http://localhost:5000/api/signup', {username,email,password});
-        alert('User signed up successfully');
+        await axios.post('http://localhost:5000/api/auth/signup', {username,email,password});
+        // alert('User signed up successfully');
+        toast.success("User Signed in Successfully");
        navigate('/Dashboard');
       } catch (error) {
         console.error('Error signing up:', error);
-        alert('Failed to sign up');
+        toast.error("Failed to SignUp");
+        //alert('Failed to sign up');
       }
     }
   };

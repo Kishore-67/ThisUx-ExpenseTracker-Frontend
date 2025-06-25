@@ -5,6 +5,7 @@ import ima from './Revenue-bro.png';
 import { FaRegUser } from 'react-icons/fa';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Signin = () => {
   const [email, setEmail] = useState('');
@@ -20,19 +21,22 @@ const Signin = () => {
     }
 
     try {
-      const res = await axios.post('http://localhost:5000/api/signin', { email, password });
+      const res = await axios.post('http://localhost:5000/api/auth/signin', { email, password });
 
       // Check message returned from backend
       if (res.data.message === 'Login successful') {
         console.log('Login success');
-        alert('Login successful!');
+        //alert('Login successful!');
+        toast.success('Successfully LoggedIn')
         navigate('/Dashboard');
       } else {
-        alert('Incorrect email or password');
+          toast.warn('Incorrect Email or Password');
+          //alert('Incorrect email or password');
       }
     } catch (error) {
       console.error('Error signing in:', error);
-      alert('Failed to sign in');
+      //alert('Failed to sign in');
+      toast.error("Failed to Signin");
     }
   };
 

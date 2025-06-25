@@ -1,5 +1,7 @@
+// Transaction.js
 import React, { useState } from 'react';
 import '../styles/Transaction.css';
+import { toast } from 'react-toastify';
 
 const Transaction = () => {
   const [expense, setExpense] = useState({
@@ -31,16 +33,18 @@ const Transaction = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...data, type }),
       });
+
       if (response.ok) {
-        alert(`${type} added!`);
+        toast.success(`${type === 'expense' ? 'Expense' : 'Income'} added successfully!`);
         type === 'expense'
           ? setExpense({ date: '', amount: '', category: '', notes: '' })
           : setIncome({ date: '', amount: '', category: '', notes: '' });
       } else {
-        alert('Error adding transaction');
+        toast.error('Failed to add transaction. Try again!');
       }
     } catch (err) {
       console.error(err);
+      toast.error('Server error while submitting transaction.');
     }
   };
 

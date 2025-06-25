@@ -12,6 +12,7 @@ import {
   BarElement,
   Title,
 } from 'chart.js';
+import { toast } from 'react-toastify';
 
 ChartJS.register(
   ArcElement,
@@ -167,8 +168,10 @@ function Dashboard() {
   try {
     await axios.delete(`http://localhost:5000/api/transactions/${id}`);
     fetchData(); // refresh the data
+    toast.success("Successfully Deleted !")
   } catch (err) {
     console.error("Failed to delete transaction:", err);
+    toast.error("Failed to Delete transaction !");
   }
 };
 
@@ -179,8 +182,20 @@ const handleEdit = (transaction) => {
       ...transaction,
       amount: Number(newAmount)
     })
-    .then(() => fetchData())
-    .catch(err => console.error("Failed to update:", err));
+    
+    .then(() => {
+    toast.success("Transaction updated successfully!");
+    fetchData();
+  })
+    .catch(err => {
+      
+      console.error("Failed to update:", err);
+      toast.error("Failed to update transaction.");
+      })
+
+  }
+  else{
+    toast.warn("Enter a Valid Data!")
   }
 };
 
