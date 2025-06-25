@@ -1,0 +1,56 @@
+.reports-container {
+  padding: 30px;
+  background: #f9fafe;
+}
+
+.reports-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.filters select {
+  margin-left: 10px;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.charts-section {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.chart-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+  flex: 1;
+  min-width: 320px;
+}
+
+.table-section {
+  margin-top: 30px;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+th {
+  background-color: #f4f4f4;
+}

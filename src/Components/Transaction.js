@@ -1,0 +1,100 @@
+import React, { useState } from 'react';
+import '../styles/Transaction.css';
+
+const Transaction = () => {
+  const [expense, setExpense] = useState({
+    date: '',
+    amount: '',
+    category: '',
+    notes: '',
+  });
+
+  const [income, setIncome] = useState({
+    date: '',
+    amount: '',
+    category: '',
+    notes: '',
+  });
+
+  const handleExpenseChange = (e) => {
+    setExpense({ ...expense, [e.target.name]: e.target.value });
+  };
+
+  const handleIncomeChange = (e) => {
+    setIncome({ ...income, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (type, data) => {
+    try {
+      const response = await fetch('http://localhost:5000/api/transactions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...data, type }),
+      });
+      if (response.ok) {
+        alert(`${type} added!`);
+        type === 'expense'
+          ? setExpense({ date: '', amount: '', category: '', notes: '' })
+          : setIncome({ date: '', amount: '', category: '', notes: '' });
+      } else {
+        alert('Error adding transaction');
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  return (
+    <div className="transaction-form-section">
+      <div className="transaction-card">
+        <h2>Add Expense</h2>
+        <form className="transaction-form" onSubmit={(e) => { e.preventDefault(); handleSubmit('expense', expense); }}>
+          <label>Date</label>
+          <input type="date" name="date" value={expense.date} onChange={handleExpenseChange} />
+
+          <label>Amount</label>
+          <input type="number" name="amount" placeholder="Enter amount" value={expense.amount} onChange={handleExpenseChange} />
+
+          <label>Category</label>
+          <select name="category" value={expense.category} onChange={handleExpenseChange}>
+            <option value="">Select Category</option>
+            <option value="food">Food</option>
+            <option value="rent">Rent</option>
+            <option value="transport">Transport</option>
+          </select>
+
+          <label>Notes</label>
+          <textarea name="notes" placeholder="Write notes..." value={expense.notes} onChange={handleExpenseChange} />
+
+          <button type="submit">Add Expense</button>
+        </form>
+      </div>
+
+      <div className="transaction-card">
+        <h2>Add Income</h2>
+        <form className="transaction-form" onSubmit={(e) => { e.preventDefault(); handleSubmit('income', income); }}>
+          <label>Date</label>
+          <input type="date" name="date" value={income.date} onChange={handleIncomeChange} />
+
+          <label>Amount</label>
+          <input type="number" name="amount" placeholder="Enter amount" value={income.amount} onChange={handleIncomeChange} />
+
+          <label>Source</label>
+          <select name="category" value={income.category} onChange={handleIncomeChange}>
+            <option value="">Select Source</option>
+            <option value="salary">Salary</option>
+            <option value="freelance">Freelance</option>
+            <option value="other">Other</option>
+          </select>
+
+          <label>Notes</label>
+          <textarea name="notes" placeholder="Write notes..." value={income.notes} onChange={handleIncomeChange} />
+
+          <button type="submit">Add Income</button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default Transaction;
