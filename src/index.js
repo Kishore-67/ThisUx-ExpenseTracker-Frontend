@@ -2,24 +2,25 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import './index.css';
-import App from './App';
+import App from './LandingPage';
 import Sidebar from './Components/SideBar';
 import Dashboard from './Components/Dashboard';
 import Transaction from './Components/Transaction';
 import Reports from './Components/Reports';
 import SignIn from './Authentication/Signin';
 import SignUp from './Authentication/SignUp';
-
+import LandingPage from './LandingPage';
 import { Navigate } from 'react-router-dom';
 
 const MainLayout = () => {
   const location = useLocation();
-  const noSidebarRoutes = ['/signin', '/signup'];
+  const noSidebarRoutes = ['/signin', '/signup','/l'];
 
   const isAuthPage = noSidebarRoutes.includes(location.pathname);
 
   return isAuthPage ? (
     <Routes>
+      <Route path="/l" element={<LandingPage />} />
       <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />
       {/* Optional fallback */}
@@ -34,6 +35,7 @@ const MainLayout = () => {
           <Route path="/add" element={<Transaction />} />
           <Route path="/rep" element={<Reports />} />
           <Route path="*" element={<Navigate to="/" />} />
+          
         </Routes>
       </div>
     </div>
