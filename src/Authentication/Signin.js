@@ -26,7 +26,7 @@ const Signin = () => {
       if (res.data.message === 'Login successful') {
         console.log('Login success');
         alert('Login successful!');
-        navigate('/');
+        navigate('/Dashboard');
       } else {
         alert('Incorrect email or password');
       }

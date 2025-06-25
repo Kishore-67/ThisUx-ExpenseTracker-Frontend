@@ -14,16 +14,15 @@ import { Navigate } from 'react-router-dom';
 
 const MainLayout = () => {
   const location = useLocation();
-  const noSidebarRoutes = ['/signin', '/signup','/l'];
+  const noSidebarRoutes = ['/signin', '/signup','/'];
 
   const isAuthPage = noSidebarRoutes.includes(location.pathname);
 
   return isAuthPage ? (
     <Routes>
-      <Route path="/l" element={<LandingPage />} />
+      <Route path="/" element={<LandingPage />} />
       <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />
-      {/* Optional fallback */}
       <Route path="*" element={<Navigate to="/signin" />} />
     </Routes>
   ) : (
@@ -31,10 +30,10 @@ const MainLayout = () => {
       <Sidebar />
       <div className="main">
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/add" element={<Transaction />} />
           <Route path="/rep" element={<Reports />} />
-          <Route path="*" element={<Navigate to="/" />} />
+          {/* <Route path="*" element={<Navigate to="/" />} /> */}
           
         </Routes>
       </div>

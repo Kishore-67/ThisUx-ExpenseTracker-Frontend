@@ -31,7 +31,7 @@ const SignUp = () => {
       try {
         await axios.post('http://localhost:5000/signup', {username,email,password});
         alert('User signed up successfully');
-       navigate('/Home');
+       navigate('/Dashboard');
       } catch (error) {
         console.error('Error signing up:', error);
         alert('Failed to sign up');

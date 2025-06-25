@@ -1,8 +1,8 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background-color: #f8f9fb;
-  color: #222;
+  background-color: #0d1117;
+  color: #f0f0f0;
 }
 
 .landing-wrapper {
@@ -17,8 +17,8 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 20px 60px;
-  background-color: white;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  background-color: #161b22;
+  box-shadow: 0 1px 6px rgba(255, 255, 255, 0.05);
   position: sticky;
   top: 0;
   z-index: 10;
@@ -27,19 +27,20 @@ body {
 .logo {
   font-size: 22px;
   font-weight: bold;
+  color: #ffffff;
 }
 
 .navbar nav a {
   margin-left: 30px;
   text-decoration: none;
-  color: #444;
+  color: #c9d1d9;
   font-weight: 500;
 }
 
 .login-btn {
   text-decoration: none;
   font-weight: bold;
-  color: #0a58ca;
+  color: #58a6ff;
   margin-left: auto;
 }
 
@@ -49,7 +50,7 @@ body {
   padding: 60px;
   gap: 60px;
   flex-wrap: wrap;
-  background: #ffffff;
+  background: #0d1117;
   flex: 1;
   align-items: center;
   min-height: calc(100vh - 100px);
@@ -64,6 +65,7 @@ body {
   line-height: 1.3;
   font-weight: 700;
   margin: 0;
+  color: #f0f6fc;
 }
 
 .hero-text h1 span {
@@ -74,7 +76,7 @@ body {
   font-size: 17px;
   margin: 20px 0 30px;
   max-width: 500px;
-  color: #555;
+  color: #8b949e;
 }
 
 .cta {
@@ -99,14 +101,14 @@ body {
 }
 
 .box {
-  background: #ffffff;
+  background: #161b22;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 12px rgba(255, 255, 255, 0.05);
   text-align: center;
   font-size: 16px;
   font-weight: 500;
-  color: #333;
+  color: #c9d1d9;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -128,21 +130,22 @@ body {
 .logo-box {
   font-size: 13px;
   font-style: italic;
-  color: #777;
-  background: #f9f9f9;
+  color: #8b949e;
+  background: #21262d;
 }
 
 /* Trusted Section */
 .trusted {
   text-align: center;
   padding: 60px 20px;
-  background: #eef1f4;
+  background: #161b22;
 }
 
 .trusted p {
   font-weight: bold;
   margin-bottom: 30px;
   font-size: 17px;
+  color: #f0f6fc;
 }
 
 .logo-row {
@@ -151,5 +154,5 @@ body {
   justify-content: center;
   gap: 40px;
   font-size: 16px;
-  color: #555;
+  color: #8b949e;
 }

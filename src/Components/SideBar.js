@@ -6,7 +6,7 @@ function Sidebar() {
     <div className="sidebar">
       <h2>Expense Tracker</h2>
       <ul>
-         <li><Link to="/">Dashboard</Link></li>
+         <li><Link to="/Dashboard">Dashboard</Link></li>
         <li><Link to="/add">New Transaction</Link></li>
         <li><Link to="/rep">Reports</Link></li>
       </ul>
