@@ -61,6 +61,7 @@ const Transaction = () => {
             <option value="food">Food</option>
             <option value="rent">Rent</option>
             <option value="transport">Transport</option>
+            <option value="Other">Other</option>
           </select>
 
           <label>Notes</label>

@@ -29,7 +29,7 @@ const SignUp = () => {
     
     else{
       try {
-        await axios.post('http://localhost:5000/signup', {username,email,password});
+        await axios.post('http://localhost:5000/api/signup', {username,email,password});
         alert('User signed up successfully');
        navigate('/Dashboard');
       } catch (error) {

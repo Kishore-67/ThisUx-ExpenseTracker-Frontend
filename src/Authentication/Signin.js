@@ -20,7 +20,7 @@ const Signin = () => {
     }
 
     try {
-      const res = await axios.post('http://localhost:5000/login', { email, password });
+      const res = await axios.post('http://localhost:5000/api/signin', { email, password });
 
       // Check message returned from backend
       if (res.data.message === 'Login successful') {
