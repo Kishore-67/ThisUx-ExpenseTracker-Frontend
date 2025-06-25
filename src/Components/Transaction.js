@@ -47,7 +47,7 @@ const Transaction = () => {
   return (
     <div className="transaction-form-section">
       <div className="transaction-card">
-        <h2>Add Expense</h2>
+        <h2>Expense</h2>
         <form className="transaction-form" onSubmit={(e) => { e.preventDefault(); handleSubmit('expense', expense); }}>
           <label>Date</label>
           <input type="date" name="date" value={expense.date} onChange={handleExpenseChange} />
@@ -71,7 +71,7 @@ const Transaction = () => {
       </div>
 
       <div className="transaction-card">
-        <h2>Add Income</h2>
+        <h2>Income</h2>
         <form className="transaction-form" onSubmit={(e) => { e.preventDefault(); handleSubmit('income', income); }}>
           <label>Date</label>
           <input type="date" name="date" value={income.date} onChange={handleIncomeChange} />

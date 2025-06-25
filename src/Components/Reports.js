@@ -1,37 +1,65 @@
-// Reports.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import {
-  BarChart, Bar, XAxis, YAxis, Tooltip, PieChart, Pie, Cell, Legend,
+  BarChart, Bar, XAxis, YAxis, Tooltip,
+  PieChart, Pie, Cell, Legend
 } from 'recharts';
 import '../styles/Reports.css';
 
-const barData = [
-  { name: 'Jan', value: 15000 },
-  { name: 'Feb', value: 25000 },
-  { name: 'Mar', value: 20000 },
-  { name: 'Apr', value: 32000 },
-  { name: 'May', value: 40000 },
-  { name: 'Jun', value: 28000 },
-  { name: 'Jul', value: 35000 },
-];
-
-const pieData = [
-  { name: 'Rent', value: 12000 },
-  { name: 'Salaries', value: 9000 },
-  { name: 'Utilities', value: 6000 },
-  { name: 'Office', value: 3000 },
-];
-
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AA66CC', '#33B5E5'];
 
 function Reports() {
+  const [transactions, setTransactions] = useState([]);
+  const [barData, setBarData] = useState([]);
+  const [pieData, setPieData] = useState([]);
+  const [totalExpense, setTotalExpense] = useState(0);
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/transactions')
+      .then((res) => {
+        setTransactions(res.data);
+        processCharts(res.data);
+      })
+      .catch((err) => {
+        console.error("Error fetching transactions:", err);
+      });
+  }, []);
+
+  const processCharts = (data) => {
+    const monthly = {};
+    const category = {};
+    let total = 0;
+
+    data.forEach((t) => {
+      if (t.type !== 'expense') return;
+
+      const date = new Date(t.date);
+      const month = date.toLocaleString('default', { month: 'short' });
+      const year = date.getFullYear();
+
+      const monthKey = `${month} ${year}`;
+      monthly[monthKey] = (monthly[monthKey] || 0) + Math.abs(t.amount);
+
+      category[t.category] = (category[t.category] || 0) + Math.abs(t.amount);
+
+      total += Math.abs(t.amount);
+    });
+
+    const monthlyArr = Object.entries(monthly).map(([name, value]) => ({ name, value }));
+    const categoryArr = Object.entries(category).map(([name, value]) => ({ name, value }));
+
+    setBarData(monthlyArr);
+    setPieData(categoryArr);
+    setTotalExpense(total);
+  };
+
   return (
     <div className="reports-container">
       <div className="reports-header">
         <h2>Reports</h2>
         <div className="filters">
-          <select><option>April</option></select>
-          <select><option>2025</option></select>
+          <select><option>All Months</option></select>
+          <select><option>All Years</option></select>
         </div>
       </div>
 
@@ -42,7 +70,7 @@ function Reports() {
             <XAxis dataKey="name" />
             <YAxis />
             <Tooltip />
-            <Bar dataKey="value" fill="#007bff" />
+            <Bar dataKey="value" fill="#1e90ff" />
           </BarChart>
         </div>
 
@@ -78,10 +106,13 @@ function Reports() {
             </tr>
           </thead>
           <tbody>
-            <tr><td>Rent</td><td>₹12,000</td><td>40.0%</td></tr>
-            <tr><td>Salaries</td><td>₹9,000</td><td>26.0%</td></tr>
-            <tr><td>Utilities</td><td>₹6,000</td><td>20.0%</td></tr>
-            <tr><td>Office</td><td>₹3,000</td><td>13.0%</td></tr>
+            {pieData.map((item, i) => (
+              <tr key={i}>
+                <td>{item.name}</td>
+                <td>₹{item.value.toLocaleString()}</td>
+                <td>{((item.value / totalExpense) * 100).toFixed(1)}%</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

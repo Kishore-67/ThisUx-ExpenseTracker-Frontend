@@ -4,7 +4,7 @@
     align-items: center;
     min-height: 100vh;
     /* background: url('./background.jpg') no-repeat; */
-    background-color: #0A0A0C;
+    background-color: #ffffff;
 
     background-size: cover;
     background-position: center;
@@ -25,18 +25,18 @@
     align-items: center;
     width:420px;
     /* background: transparent; */
-     background-color: #0A0A0C; 
+     background-color: #ffffff; 
 
     backdrop-filter: blur(20px);
-    box-shadow: 0 4px 8px 0 rgb(0, 0, 0), 0 6px 20px 0 rgb(0, 0, 0);
-    color:  rgb(255, 255, 255);
+    box-shadow: 0 4px 8px 0 rgb(97, 97, 97), 0 6px 20px 0 rgb(133, 133, 133);
+    color:  rgb(0, 0, 0);
     border-radius: 30px;
     padding: 30px 40px;
 }
 .Signup h1{
     font-size: 36px;
     text-align: center;
-    color: #ffffff;
+    color: #000000;
 }
 .Signup .input-box{
     position: relative;
@@ -52,16 +52,16 @@
     height:100%;
     background: transparent;
     outline: none;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(115, 115, 115, 0.751);
     border-radius: 40px;
-    color: #ffffff;
+    color: #000000;
     padding: 20px 45px 20px 20px;
     font-size: medium;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 
 }
 .input-box input::placeholder{
-    color: #ffffff;
+    color: #000000;
 
 }
 .but-container{
@@ -87,7 +87,7 @@
     margin-right: 4px;
 }
 .remember-forgot a{
-    color: #fff;
+    color: #000000;
     text-decoration: none;
 }
 .remember-forgot a:hover{
@@ -103,7 +103,7 @@
     border:none;
     outline:none;
     border-radius:40px;
-    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    /* box-shadow: 0 0 10px rgba(0,0,0,.1); */
     cursor: pointer;
     font-size: 16px;
     color: #000000;
@@ -116,7 +116,7 @@
     margin: 20px 0 15px;
 }
 .register-link p a{
-    color:#fff;
+    color:#000000;
     text-decoration: none;
     font-weight: 600;
 }
@@ -126,20 +126,5 @@
 }
 .register-but{
     background-color: #fff;
-    color: #ffffff;
+    color: #000000;
 }
-/* *{
-    margin: 0;
-    padding:0;
-    box-sizing: border-box;
-  }
-  body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: url('./wallpaperflare.com_wallpaper.jpg') no-repeat;
-    background-size: cover;
-    background-position: center;
-    
-  } */
