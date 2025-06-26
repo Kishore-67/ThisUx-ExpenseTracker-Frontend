@@ -66,7 +66,7 @@ function Dashboard() {
     }
 
     // ✅ Send token in Authorization header
-    const res = await axios.get('https://expensetracker-backend-9d1y.onrender.com//api/transactions', {
+    const res = await axios.get('https://expensetracker-backend-9d1y.onrender.com/api/transactions', {
       headers: {
         Authorization: `Bearer ${token}`
       }
