@@ -26,27 +26,41 @@ const Transaction = () => {
     setIncome({ ...income, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (type, data) => {
-    try {
-      const response = await fetch('https://expensetracker-backend-9d1y.onrender.com/api/transactions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, type }),
-      });
+const handleSubmit = async (type, data) => {
+  try {
+    // 🔐 Get the token from localStorage
+    const token = localStorage.getItem('token');
 
-      if (response.ok) {
-        toast.success(`${type === 'expense' ? 'Expense' : 'Income'} added successfully!`);
-        type === 'expense'
-          ? setExpense({ date: '', amount: '', category: '', notes: '' })
-          : setIncome({ date: '', amount: '', category: '', notes: '' });
-      } else {
-        toast.error('Failed to add transaction. Try again!');
-      }
-    } catch (err) {
-      console.error(err);
-      toast.error('Server error while submitting transaction.');
+    if (!token) {
+      toast.error('User not authenticated.');
+      return;
     }
-  };
+
+    // 📨 Send POST request with token in header
+    const response = await fetch('https://expensetracker-backend-9d1y.onrender.com/api/transactions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`, // ✅ Attach token
+      },
+      body: JSON.stringify({ ...data, type }),
+    });
+
+    if (response.ok) {
+      toast.success(`${type === 'expense' ? 'Expense' : 'Income'} added successfully!`);
+
+      type === 'expense'
+        ? setExpense({ date: '', amount: '', category: '', notes: '' })
+        : setIncome({ date: '', amount: '', category: '', notes: '' });
+    } else {
+      toast.error('Failed to add transaction. Try again!');
+    }
+  } catch (err) {
+    console.error(err);
+    toast.error('Server error while submitting transaction.');
+  }
+};
+
 
   return (
     <div className="transaction-form-section">

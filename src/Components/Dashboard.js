@@ -34,7 +34,6 @@ function Dashboard() {
     fetchData();
   }, []);
 
-  // Helper function to get date range for current month
   const getCurrentMonthRange = () => {
     const now = new Date();
     const firstDayCurrentMonth = new Date(now.getFullYear(), now.getMonth(), 1);
@@ -46,7 +45,6 @@ function Dashboard() {
     };
   };
 
-  // Helper function to filter transactions for current month
   const filterCurrentMonthTransactions = (transactions) => {
     const { start, end } = getCurrentMonthRange();
     
@@ -65,7 +63,6 @@ function Dashboard() {
       return;
     }
 
-    // ✅ Send token in Authorization header
     const res = await axios.get('https://expensetracker-backend-9d1y.onrender.com/api/transactions', {
       headers: {
         Authorization: `Bearer ${token}`
