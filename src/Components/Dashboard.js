@@ -172,42 +172,65 @@ function Dashboard() {
       }
     },
   };
-  const handleDelete = async (id) => {
+const handleDelete = async (id) => {
   if (!window.confirm("Are you sure you want to delete this transaction?")) return;
 
   try {
-    await axios.delete(`http://localhost:5000/api/transactions/${id}`);
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      toast.error("User not authenticated.");
+      return;
+    }
+
+    await axios.delete(`https://expensetracker-backend-9d1y.onrender.com/api/transactions/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    });
+
     fetchData(); // refresh the data
-    toast.success("Successfully Deleted !")
+    toast.success("Successfully Deleted !");
   } catch (err) {
     console.error("Failed to delete transaction:", err);
     toast.error("Failed to Delete transaction !");
   }
 };
 
+
 const handleEdit = (transaction) => {
   const newAmount = prompt("Enter new amount", transaction.amount);
+
   if (newAmount && !isNaN(newAmount)) {
-    axios.put(`http://localhost:5000/api/transactions/${transaction._id}`, {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      toast.error("User not authenticated.");
+      return;
+    }
+
+    axios.put(`https://expensetracker-backend-9d1y.onrender.com/api/transactions/${transaction._id}`, {
       ...transaction,
-      amount: Number(newAmount)
+      amount: Number(newAmount),
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
     })
-    
     .then(() => {
-    toast.success("Transaction updated successfully!");
-    fetchData();
-  })
+      toast.success("Transaction updated successfully!");
+      fetchData();
+    })
     .catch(err => {
-      
       console.error("Failed to update:", err);
       toast.error("Failed to update transaction.");
-      })
+    });
 
-  }
-  else{
-    toast.warn("Enter a Valid Data!")
+  } else {
+    toast.warn("Enter a Valid Data!");
   }
 };
+
 
 
   return (
