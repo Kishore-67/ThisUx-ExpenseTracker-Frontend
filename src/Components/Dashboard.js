@@ -57,32 +57,45 @@ function Dashboard() {
   };
 
   const fetchData = async () => {
-    try {
-      const res = await axios.get('http://localhost:5000/api/transactions');
-      const data = res.data;
+  try {
+    const token = localStorage.getItem('token'); // ✅ Get token
 
-      setTransactions(data);
-
-      // Filter transactions for current month only
-      const currentMonthData = filterCurrentMonthTransactions(data);
-      setLastMonthTransactions(currentMonthData);
-
-      // Calculate totals for current month only
-      let totalIncome = 0;
-      let totalExpense = 0;
-
-      currentMonthData.forEach((item) => {
-        const amount = Number(item.amount);
-        if (item.type === 'income') totalIncome += amount;
-        else if (item.type === 'expense') totalExpense += amount;
-      });
-
-      setIncome(totalIncome);
-      setExpense(totalExpense);
-    } catch (err) {
-      console.error('Error fetching data:', err);
+    if (!token) {
+      console.warn('⚠️ No token found. User not logged in.');
+      return;
     }
-  };
+
+    // ✅ Send token in Authorization header
+    const res = await axios.get('http://localhost:5000/api/transactions', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    const data = res.data;
+
+    setTransactions(data);
+
+    // Filter transactions for current month only
+    const currentMonthData = filterCurrentMonthTransactions(data);
+    setLastMonthTransactions(currentMonthData);
+
+    // Calculate totals
+    let totalIncome = 0;
+    let totalExpense = 0;
+
+    currentMonthData.forEach((item) => {
+      const amount = Number(item.amount);
+      if (item.type === 'income') totalIncome += amount;
+      else if (item.type === 'expense') totalExpense += amount;
+    });
+
+    setIncome(totalIncome);
+    setExpense(totalExpense);
+  } catch (err) {
+    console.error('❌ Error fetching data:', err);
+  }
+};
 
   // Get current month name for display
   const getCurrentMonthName = () => {

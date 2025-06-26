@@ -9,6 +9,7 @@ import Transaction from './Components/Transaction';
 import Reports from './Components/Reports';
 import SignIn from './Authentication/Signin';
 import SignUp from './Authentication/SignUp';
+import Profile from './Components/Profile';
 import LandingPage from './LandingPage';
 import { Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -34,6 +35,7 @@ const MainLayout = () => {
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/add" element={<Transaction />} />
           <Route path="/rep" element={<Reports />} />
+          <Route path="/prof" element={<Profile />} />
           {/* <Route path="*" element={<Navigate to="/" />} /> */}
           
         </Routes>

@@ -15,15 +15,21 @@ function Reports() {
   const [totalExpense, setTotalExpense] = useState(0);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/transactions')
-      .then((res) => {
-        setTransactions(res.data);
-        processCharts(res.data);
-      })
-      .catch((err) => {
-        console.error("Error fetching transactions:", err);
-      });
-  }, []);
+  const token = localStorage.getItem('token');
+
+  axios.get('http://localhost:5000/api/transactions', {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then((res) => {
+      setTransactions(res.data);
+      processCharts(res.data);
+    })
+    .catch((err) => {
+      console.error("Error fetching transactions:", err);
+    });
+}, []);
 
   const processCharts = (data) => {
     const monthly = {};

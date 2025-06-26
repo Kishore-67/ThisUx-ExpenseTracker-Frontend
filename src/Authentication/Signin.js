@@ -27,6 +27,9 @@ const Signin = () => {
       if (res.data.message === 'Login successful') {
         console.log('Login success');
         //alert('Login successful!');
+    localStorage.setItem('token', res.data.token);
+          console.log("Saved token:", localStorage.getItem('token'));
+
         toast.success('Successfully LoggedIn')
         navigate('/Dashboard');
       } else {

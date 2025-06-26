@@ -40,9 +40,24 @@
   margin-top: auto;
   margin-bottom: 35px;
   display: flex;
+  padding-right: 20px;
   align-items: center;
   padding-left: 20px;
 }
+.sidebar-bottom button{
+  border: none;
+}
+.logout-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  gap: 0.5rem;
+}
+
 
 .sidebar-icon {
   display: flex;
