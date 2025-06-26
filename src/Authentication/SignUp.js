@@ -31,7 +31,7 @@ const SignUp = () => {
     
     else{
       try {
-        await axios.post('http://localhost:5000/api/auth/signup', {username,email,password});
+        await axios.post('https://expensetracker-backend-9d1y.onrender.com/api/auth/signup', {username,email,password});
         // alert('User signed up successfully');
         toast.success("User Signed in Successfully");
        navigate('/Dashboard');

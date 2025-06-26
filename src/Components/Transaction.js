@@ -28,7 +28,7 @@ const Transaction = () => {
 
   const handleSubmit = async (type, data) => {
     try {
-      const response = await fetch('http://localhost:5000/api/transactions', {
+      const response = await fetch('https://expensetracker-backend-9d1y.onrender.com/api/transactions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...data, type }),
